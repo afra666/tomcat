@@ -1,0 +1,30 @@
+【1.下载tomcat、解压到D:\Program Files\tomcat 需要改文件夹名字】
+
+	https://tomcat.apache.org/
+	9.0.26
+	Binary Distributions
+	Core:
+	【64-bit Windows zip (pgp, sha512)】
+
+【2.新建3个环境变量】
+
+	=============================
+	CATALINA_BASE
+	D:\Program Files\tomcat
+	=============================
+	CATALINA_HOME
+	D:\Program Files\tomcat
+	=======前面加分号============
+	Path
+	;D:\Program Files\tomcat\bin
+	=============================
+
+【3.检查版本号】
+	catalina version或者version
+
+【4.启动】
+	直接打开startup.bat
+	然后输入localhost:8080
+
+【5.关闭】
+	直接打开shutdown.bat
