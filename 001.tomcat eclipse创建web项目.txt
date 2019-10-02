@@ -1,0 +1,5 @@
+1.添加jre的路径：
+eclipse--->preference----->java------>installed JRES----->Add----->standard VM----->next ----->finish
+
+2.新建Dynamic Web Project
+起名字，finish。。。如果有红叉是因为没有添加jre
