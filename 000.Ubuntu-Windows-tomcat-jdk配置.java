@@ -1,0 +1,155 @@
+# Java-and-tomcat
+============================【Ubuntu 16 JDK】========================
+#1.下载JDK1.8
+链接：https://pan.baidu.com/s/1bF4PPvEB3CcpWv7gTwJhoQ 
+提取码：ts4j 
+
+#2.开始复制粘贴
+粘贴到home
+sudo su
+sudo mkdir /usr/lib/jvm
+chmod 777 /usr/lib/jvm
+sudo tar -zxvf jdk-8u212-linux-x64.tar.gz -C /usr/lib/jvm
+
+#3.环境变量按键盘a，在文件末尾追加下面内容：这里要注意目录要换成自己解压的jdk 目录，不要加空格！
+sudo vi ~/.bashrc
+
+
+
+==========================复制,不能有空格====================================
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_212
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+===============================================================
+按esc，:wq退出
+
+#4.刷新变量
+source ~/.bashrc
+
+#5.注册
+sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_212/bin/java 300
+==================================常用命令=================================
+查看版本
+java -version
+which java
+echo $JAVA_HOME
+
+====================================【ubuntu tomcat】===========================
+===================tomcat需要预安装JAVA===========================
+1.下载地址：https://tomcat.apache.org/download-90.cgi
+
+9.0.26
+Please see the README file for packaging information. It explains what every distribution contains.
+
+Binary Distributions
+Core:
+zip (pgp, sha512)
+tar.gz (pgp, sha512)  #选择这个tar.gz文件，适用于Ubuntu
+32-bit Windows zip (pgp, sha512)
+64-bit Windows zip (pgp, sha512)#选择这个zip文件，适用于windows
+32-bit/64-bit Windows Service Installer (pgp, sha512)
+
+文件名：apache-tomcat-9.0.26.tar.gz
+大小：11.7M
+或
+链接：https://pan.baidu.com/s/1_wlLlsFXbf2P0AHhnPV3iw 
+提取码：6x12 
+
+2.安装解压
+sudo su
+tar -zxvf apache-tomcat-9.0.26.tar.gz
+
+chmod 777 /opt
+移动
+sudo cp -r apache-tomcat-9.0.26   /opt
+打开编辑
+cd /opt/apache-tomcat-9.0.26/bin
+vim startup.sh
+#3.配置
+##在exec "$PRGDIR"/"$EXECUTABLE" start "$@" 前面加上以下内容
+JAVA_HOME=/usr/lib/jvm/jdk1.8.0_212
+JRE_HOME=/usr/lib/jvm/jdk1.8.0_212/jre  
+PATH=$JAVA_HOME/bin:$JRE_HOME:$PATH  
+CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar  
+TOMCAT_HOME=/opt/apache-tomcat-9.0.26
+##一样修改文件内容
+cd /opt/apache-tomcat-9.0.26/bin && vim shutdown.sh
+
+JAVA_HOME=/usr/lib/jvm/jdk1.8.0_212
+JRE_HOME=/usr/lib/jvm/jdk1.8.0_212/jre  
+PATH=$JAVA_HOME/bin:$JRE_HOME:$PATH  
+CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar  
+TOMCAT_HOME=/opt/apache-tomcat-9.0.26
+
+#4.启动tomcat
+cd /opt/apache-tomcat-9.0.26/bin && ./startup.sh
+#5.常用命令
+关闭
+cd /opt/apache-tomcat-9.0.26/bin && ./shutdown.sh
+查看版本
+cd /opt/apache-tomcat-9.0.26/bin && ./version.sh
+测试主页
+http://localhost:8080/
+=============================【windows JDK】========================================
+#1.下载JDK1.8
+链接：https://pan.baidu.com/s/1bF4PPvEB3CcpWv7gTwJhoQ 
+提取码：ts4j 
+
+#2.安装到自定义位置C:\Program Files\Java，下面产生jdk1.8.0_181和jre1.8.0_181文件夹
+新建JAVA_HOME
+C:\Program Files\Java\jdk1.8.0_181
+新建CLASSPATH
+.;%Java_Home%\bin;%Java_Home%\lib\dt.jar;%Java_Home%\lib\tools.jar
+添加Path
+%Java_Home%\bin;%Java_Home%\jre\bin;
+#3.查看java_home
+echo %java_home%
+#4.常用指令
+java
+java -version
+javac
+
+=============================【windows tomcat】========================================
+
+1.下载地址：https://tomcat.apache.org/download-90.cgi
+
+9.0.26
+Please see the README file for packaging information. It explains what every distribution contains.
+
+Binary Distributions
+Core:
+zip (pgp, sha512)
+tar.gz (pgp, sha512)  #选择这个tar.gz文件，适用于Ubuntu
+32-bit Windows zip (pgp, sha512)
+64-bit Windows zip (pgp, sha512)#选择这个zip文件，适用于windows
+32-bit/64-bit Windows Service Installer (pgp, sha512)
+
+文件名：apache-tomcat-9.0.26-windows-x64.zip
+大小：13.6M
+或
+链接：https://pan.baidu.com/s/1_wlLlsFXbf2P0AHhnPV3iw 
+提取码：6x12 
+
+2.解压到D:\Program Files\apache-tomcat-9.0.26
+
+CATALINA_BASE
+D:\Program Files\apache-tomcat-9.0.26
+
+CATALINA_HOME
+D:\Program Files\apache-tomcat-9.0.26
+
+Path
+%CATALINA_HOME%\bin;%CATALINA_HOME%\lib;
+
+3.启动tomcat
+D: && cd D:\Program Files\apache-tomcat-9.0.26\bin && startup.bat
+
+关闭
+D: && cd D:\Program Files\apache-tomcat-9.0.26\bin && shutdown.bat
+
+查看版本
+D: && cd D:\Program Files\apache-tomcat-9.0.26\bin && version.bat
+
+测试主页
+http://localhost:8080/
